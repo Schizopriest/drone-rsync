@@ -48,14 +48,14 @@ else
 fi
 
 # Building rsync command
-expr="rsync -az $ARGS"
+expr="mkdir -p $PLUGIN_TARGET && rsync -az $ARGS"
 
 if [[ -n "$PLUGIN_RECURSIVE" && "$PLUGIN_RECURSIVE" == "true" ]]; then
     expr="$expr -r"
 fi
 
 if [[ -n "$PLUGIN_DELETE" && "$PLUGIN_DELETE" == "true" ]]; then
-    expr="$expr --del"
+    expr="$expr --delete"
 fi
 
 expr="$expr -e 'ssh -p $PORT -o UserKnownHostsFile=/dev/null -o LogLevel=quiet -o StrictHostKeyChecking=no'"
